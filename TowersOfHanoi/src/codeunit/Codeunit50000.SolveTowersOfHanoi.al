@@ -1,23 +1,21 @@
 codeunit 50000 SolveTowersOfHanoi
 {
-    trigger OnRun()
-    begin
-    end;
-
     var
-        Err: Label 'Maximum Tower size is %1';
+        MaxSizeErr: Label 'Maximum Tower size is %1', Comment = '%1 = Number of disks';
+        RecNotTemporaryErr: Label 'Internal error. Only temporary table is allowed.';
 
-    procedure Solve(var Rec: record TowerTable; NoOfDiscs: Integer);
+    procedure Solve(var TowerTableRec: record TowerTable; NoOfDiscs: Integer);
     begin
-        //check if there is anything to process
-        if NoOfDiscs > MaxStrLen(Rec.TowerA) then begin
-            Message(Err, MaxStrLen(Rec.TowerA));
-        end
-        else begin
-            Rec.DeleteAll;
-            Initialize(Rec, NoOfDiscs);
-            Move(Rec, NoOfDiscs, Rec.TowerA, Rec.TowerC, Rec.TowerB);
-        end;
+        // check if there is anything to process
+        if NoOfDiscs > MaxStrLen(TowerTableRec.TowerA) then
+            Error(MaxSizeErr, MaxStrLen(TowerTableRec.TowerA));
+
+        if not TowerTableRec.IsTemporary() then
+            Error(RecNotTemporaryErr);
+        TowerTableRec.DeleteAll(true);
+
+        Initialize(TowerTableRec, NoOfDiscs);
+        Move(TowerTableRec, NoOfDiscs, TowerTableRec.TowerA, TowerTableRec.TowerC, TowerTableRec.TowerB);
     end;
 
     local procedure Initialize(var rec: record TowerTable; NoOFDiscs: Integer);
@@ -27,17 +25,16 @@ codeunit 50000 SolveTowersOfHanoi
         Rec.Step := 1;
         FOR i := NoOFDiscs DOWNTO 1 DO
             Rec.TowerA := Rec.TowerA + Format(i);
-        Rec.INSERT();
-        Commit();
+        Rec.Insert();
     end;
 
-    local procedure Move(var r: record TowerTable; n: integer; var source: Text[10]; var target: text[10]; var aux: text[10]);
+    local procedure Move(var r: record TowerTable; n: integer; var source: Text[9]; var target: text[9]; var aux: text[9]);
     begin
         if n > 0 then begin
             Move(r, n - 1, source, aux, target);
 
             target := target + source[StrLen(source)];
-            source := CopyStr(source, 1, StrLen(source) - 1);
+            source := CopyStr(source, 1, StrLen(source) - 1); // AK: warrning solved https://github.com/microsoft/AL/issues/1462#issuecomment-428944171
 
             r.Step := r.Step + 1;
             r.Insert();
