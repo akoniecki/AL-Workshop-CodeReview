@@ -3,10 +3,12 @@ page 50000 TowersList
     PageType = List;
     SourceTable = 50000;
     SourceTableTemporary = true;
-    Editable = true;
     ApplicationArea = All;
     Caption = 'Towers of Hanoi';
     UsageCategory = Lists;
+    InsertAllowed = false;
+    ModifyAllowed = false;
+    DeleteAllowed = false;
 
     layout
     {
@@ -14,9 +16,11 @@ page 50000 TowersList
         {
             group(Configuration)
             {
+                Editable = true;
                 field(NoOfDiscs; NoOfDiscs)
                 {
                     Caption = 'No of Discs';
+                    ToolTip = 'Put the number of disks';
                 }
             }
             group(Solution)
@@ -25,19 +29,19 @@ page 50000 TowersList
                 {
                     field(Step; Rec.Step)
                     {
-                        Editable = false;
+                        ToolTip = 'Step No.';
                     }
                     field(TowerA; Rec.TowerA)
                     {
-                        Editable = false;
+                        ToolTip = 'Tower A';
                     }
                     field(TowerB; Rec.TowerB)
                     {
-                        Editable = false;
+                        ToolTip = 'Tower B';
                     }
                     field(TowerC; Rec.TowerC)
                     {
-                        Editable = false;
+                        ToolTip = 'Tower C';
                     }
                 }
             }
@@ -52,7 +56,9 @@ page 50000 TowersList
             {
                 Promoted = true;
                 PromotedOnly = true;
-                PromotedCategory = New;
+                PromotedCategory = Process;
+                Caption = 'Solve It!';
+                ToolTip = 'Solve the tower';
 
                 trigger OnAction();
                 var
