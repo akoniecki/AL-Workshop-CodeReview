@@ -1,7 +1,7 @@
 page 50000 TowersList
 {
     PageType = List;
-    SourceTable = 50000;
+    SourceTable = TowerTable;
     SourceTableTemporary = true;
     ApplicationArea = All;
     Caption = 'Towers of Hanoi';
