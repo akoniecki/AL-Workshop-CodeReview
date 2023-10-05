@@ -1,0 +1,31 @@
+{
+  "id": "243e9fa8-cc23-45da-91bd-bc5b873021d7",
+  "name": "AL-Workshop-CodeReview Towers of Hanoi",
+  "publisher": "github.com/akoniecki",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "Contribute: https://github.com/akoniecki/AL-Workshop-CodeReview",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "22.0.0.0",
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 60000
+    }
+  ],
+  "features": [
+    "NoImplicitWith"
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": false
+  }
+}
