@@ -3,6 +3,8 @@ codeunit 50000 SolveTowersOfHanoi
     internal procedure SolveTowersOfHanoi(var TowerTableRec: Record TowerTable; var NoOfDiscs: Integer; var NoOfDiscs: Integer; HideDialog: Boolean)
     var
         IsHandled: Boolean;
+        MaxSizeErr: Label 'Maximum Tower size is %1', Comment = '%1 = Number of disks';
+        RecNotTemporaryErr: Label 'Internal error. Only temporary table is allowed.';
     begin
         if not ConfirmSolveTowersOfHanoi(TowerTableRec, NoOfDiscs, HideDialog) then exit;
         OnBeforeSolveTowersOfHanoi(TowerTableRec, NoOfDiscs, IsHandled);
