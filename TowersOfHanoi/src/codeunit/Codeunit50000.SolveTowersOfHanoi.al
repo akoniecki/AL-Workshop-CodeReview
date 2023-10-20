@@ -25,7 +25,6 @@ codeunit 50000 SolveTowersOfHanoi
             Error(RecNotTemporaryErr);
         TowerTableRec.DeleteAll(true);
 
-        OnBeforeSolveTowersOfHanoi(TowerTableRec, NoOfDiscs, IsHandled);
         Initialize(TowerTableRec, NoOfDiscs);
         Move(TowerTableRec, NoOfDiscs, TowerTableRec.TowerA, TowerTableRec.TowerC, TowerTableRec.TowerB);
     end;
