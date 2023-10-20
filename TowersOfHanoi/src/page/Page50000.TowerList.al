@@ -62,9 +62,9 @@ page 50000 TowersList
 
                 trigger OnAction();
                 var
-                    Solve: codeunit 50000;
+                    Solve: codeunit SolveTowersOfHanoi;
                 begin
-                    Solve.Solve(Rec, NoOfDiscs);
+                    Solve.SolveTowersOfHanoi(Rec; NoOfDiscs; false)
                 end;
             }
         }
